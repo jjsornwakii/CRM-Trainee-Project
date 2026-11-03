@@ -22,7 +22,7 @@ private val FinanceDarkColorScheme = darkColorScheme(
 )
 
 @Composable
-fun ExpenseTrackerTheme(
+fun MyWalletTheme(
     content: @Composable () -> Unit
 ){
     MaterialTheme (

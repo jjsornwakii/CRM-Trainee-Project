@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.mywallet"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.mywallet"
@@ -40,6 +40,10 @@ android {
 }
 
 dependencies {
+
+
+    implementation("androidx.navigation:navigation-compose:2.9.6")
+    implementation("androidx.compose.material:material-icons-extended")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
