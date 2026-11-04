@@ -17,15 +17,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mywallet.ui.theme.FinanceBackground
 import com.example.mywallet.ui.theme.FinanceExpense
 import com.example.mywallet.ui.theme.FinancePrimary
 import com.example.mywallet.ui.theme.FinanceSurface
 import com.example.mywallet.ui.theme.FinanceTextPrimary
 import com.example.mywallet.ui.theme.FinanceTextSecondary
+import com.example.mywallet.viewmodel.ExpenseViewModel
+import kotlin.String
 
 @Composable
-fun DashboardScreen(){
+fun DashboardScreen(
+    expenseViewModel: ExpenseViewModel
+){
     Column (
         modifier = Modifier.fillMaxSize().padding(16.dp).background(FinanceBackground).padding(20.dp)
     ){
@@ -64,8 +69,8 @@ fun DashboardScreen(){
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
-                    text = "$50,000.00",
-                    color = FinancePrimary,
+                    text = (if(expenseViewModel.getBalance() < 0) "-" else "+" ) + "฿${String.format(java.util.Locale.US,"%,.2f",expenseViewModel.getBalance())}",
+                    color = if(expenseViewModel.getBalance() < 0) FinanceExpense else FinancePrimary,
                     fontSize = 32.sp
                 )
 
@@ -100,7 +105,7 @@ fun DashboardScreen(){
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
-                        text = "+$35,000",
+                        text = "+฿${String.format(java.util.Locale.US,"%,.2f",expenseViewModel.getTotalIncome())}",
                         color = FinancePrimary,
                         fontSize = 18.sp
                     )
@@ -120,7 +125,7 @@ fun DashboardScreen(){
                     Spacer(Modifier.height(8.dp))
 
                     Text(
-                        text = "-$10,000",
+                        text = "-฿${String.format(java.util.Locale.US,"%,.2f",expenseViewModel.getTotalExpense())}",
                         color = FinanceExpense,
                         fontSize = 18.sp
                     )
@@ -138,11 +143,20 @@ fun DashboardScreen(){
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text(
-                text = "No transactions yet",
-                color = FinanceTextSecondary,
-                fontSize = 14.sp
+            if(expenseViewModel.getTransactionCount() < 1){
+                Text(
+                    text = "No transactions yet",
+                    color = FinanceTextSecondary,
+                    fontSize = 14.sp
 
-            )
+                )
+            }else{
+                Text(
+                    text = "you have ${expenseViewModel.getTransactionCount()} Transactions",
+                    color = FinanceTextSecondary,
+                    fontSize = 14.sp
+                )
+            }
+
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mywallet.ui.theme.MyWalletTheme
+import com.example.mywallet.ui.theme.navigation.MainScreen
 import com.example.mywallet.ui.theme.screens.dashboard.DashboardScreen
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyWalletTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    DashboardScreen()
+                    MainScreen()
                 }
             }
         }
