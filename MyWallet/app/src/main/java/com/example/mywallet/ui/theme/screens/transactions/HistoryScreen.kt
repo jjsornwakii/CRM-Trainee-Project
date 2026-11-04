@@ -50,6 +50,11 @@ fun HistoryScreen(
             color = Color.White,
             fontSize = 24.sp
         )
+        Spacer(modifier = Modifier.height(6.dp))
+
+        Text(
+            text = ""
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
 

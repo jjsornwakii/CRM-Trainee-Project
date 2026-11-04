@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mywallet.ui.theme.FinanceBackground
 import com.example.mywallet.ui.theme.FinanceExpense
 import com.example.mywallet.ui.theme.FinancePrimary
