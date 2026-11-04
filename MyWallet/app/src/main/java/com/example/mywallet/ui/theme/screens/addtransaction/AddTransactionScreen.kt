@@ -38,6 +38,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -65,7 +66,15 @@ fun AddTransactionScreen(
     viewModel: TransactionViewModel = viewModel(),
     initailTransaction: TransactionUiModel? =  null
 ){
-    val uiState  =   initailTransaction ?: viewModel.uiState
+    LaunchedEffect(initailTransaction?.id) {
+        if(initailTransaction != null){
+            viewModel.loadTransaction(initailTransaction)
+        }else{
+            viewModel.onResetStatevalue()
+        }
+    }
+    val uiState = viewModel.uiState
+
 
 //    FormState
     Column(
@@ -162,7 +171,7 @@ fun AddTransactionScreen(
                 leadingIcon = {
                     Text(
                         text = "฿",
-                        color = FinancePrimary,
+                        color = if(uiState.type ==  "Income") FinancePrimary else FinanceExpense,
                         fontSize = 20.sp
                     )
                 },
@@ -367,6 +376,7 @@ fun AddTransactionScreen(
             Button(
                 onClick = {
                     val  transaction = TransactionUiModel(
+                        id =  initailTransaction?.id ?: 0L,
                         type = uiState.type,
                         amount = uiState.amount,
                         category = uiState.category,

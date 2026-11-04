@@ -69,6 +69,18 @@ class TransactionViewModel : ViewModel() {
         )
     }
 
+    fun loadTransaction(transaction: TransactionUiModel){
+        uiState = uiState.copy(
+            type = transaction.type,
+            amount = transaction.amount.toString(),
+            category = transaction.category,
+            note = transaction.note,
+            date = transaction.date,
+            expanded = false,
+            showDatePicker = false
+        )
+    }
+
     val categories: List<String>
         get() = if (uiState.type == "Income") {
             listOf("Salary", "Freelance", "Investment", "Gift", "Other")
